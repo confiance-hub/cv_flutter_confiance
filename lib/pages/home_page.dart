@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'login_page.dart';
+import 'famille_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,6 +14,14 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Accueil'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.family_restroom),
+            tooltip: 'Famille',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const FamillePage()),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Se déconnecter',
@@ -34,12 +43,15 @@ class HomePage extends StatelessWidget {
                 width: 140,
                 height: 140,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
-                  width: 140,
-                  height: 140,
-                  color: theme.colorScheme.primaryContainer,
-                  child: const Icon(Icons.person, size: 80),
-                ),
+                errorBuilder: (_, erreur, __) {
+                  debugPrint('ERREUR IMAGE : $erreur');
+                  return Container(
+                    width: 140,
+                    height: 140,
+                    color: theme.colorScheme.primaryContainer,
+                    child: const Icon(Icons.person, size: 80),
+                  );
+                },
               ),
             ),
           ),
